@@ -1,1 +1,1 @@
-export const api = { log: true }
+export const api = { log: false }
