@@ -13,7 +13,8 @@ function createWindow(): void {
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
-    }
+    },
+    backgroundColor: '#17141f'
   })
 
   mainWindow.on('ready-to-show', () => {
