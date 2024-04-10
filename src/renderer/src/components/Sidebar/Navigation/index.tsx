@@ -1,3 +1,5 @@
-import { api } from '@web/lib/api'
-
-export const log = () => console.log(api.log)
+export * from './Root'
+export * from './Link'
+export * from './Section'
+export * from './SectionTitle'
+export * from './SectionContent'
