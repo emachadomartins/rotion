@@ -1,5 +1,6 @@
 import React from 'react'
 import { ToC } from '../components/ToC'
+import { Editor } from '../components/Editor'
 
 export const Document: React.FC = () => (
   <main className="flex-1 flex py-12 px-10 gap-8">
@@ -20,6 +21,8 @@ export const Document: React.FC = () => (
       </ToC.Root>
     </aside>
 
-    <section className="flex-1 flex flex-col items-center">hjdiuhwaqeufdh</section>
+    <section className="flex-1 flex flex-col items-center">
+      <Editor />
+    </section>
   </main>
 )
