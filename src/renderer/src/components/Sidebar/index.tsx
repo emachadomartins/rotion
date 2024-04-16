@@ -11,8 +11,23 @@ export const Sidebar: React.FC = () => {
 
   window.api.fetchDocuments('teste').then((response) => console.log({ response }))
 
+  const handleClose = (): void => {
+    window.api.closeApp()
+  }
+  const handleMaximize = (): void => {
+    window.api.maximize()
+  }
+  const handleMinimize = (): void => {
+    window.api.minimize()
+  }
+
   return (
     <Collapsible.Content className="bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden">
+      <div className="flex top-1 left-8 p-5 gap-2">
+        <button className="w-3.5 h-3.5 bg-red-600 rounded-full" onClick={handleClose} />
+        <button className="w-3.5 h-3.5 bg-yellow-600 rounded-full" onClick={handleMinimize} />
+        <button className="w-3.5 h-3.5 bg-green-600 rounded-full" onClick={handleMaximize} />
+      </div>
       <Collapsible.Trigger
         className={clsx(
           'absolute h-5 w-5 right-4 text-rotion-200 hover:text-rotion-50 inline-flex items-center justify-center top-[1.125rem]',

@@ -12,7 +12,7 @@ function createWindow(): void {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: 'hiddenInset',
-    // frame: false,
+    frame: false,
     trafficLightPosition: {
       x: 20,
       y: 20
@@ -53,6 +53,29 @@ app.whenReady().then(() => {
   })
 
   ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.on('close', () => {
+    app.quit()
+  })
+
+  ipcMain.on('maximize', () => {
+    const mainWindow = BrowserWindow.getFocusedWindow()
+
+    if (!mainWindow) return
+
+    if (mainWindow.isMaximized()) {
+      mainWindow.unmaximize()
+    } else {
+      mainWindow.maximize()
+    }
+  })
+
+  ipcMain.on('minimize', () => {
+    const mainWindow = BrowserWindow.getFocusedWindow()
+
+    if (!mainWindow) return
+
+    mainWindow.minimize()
+  })
 
   createWindow()
 

@@ -10,7 +10,10 @@ declare global {
 
 const api = {
   fetchDocuments: async (params: unknown): Promise<void> =>
-    ipcRenderer.invoke('fetch-documents', params)
+    ipcRenderer.invoke('fetch-documents', params),
+  closeApp: async (): Promise<void> => ipcRenderer.send('close'),
+  maximize: async (): Promise<void> => ipcRenderer.send('maximize'),
+  minimize: async (): Promise<void> => ipcRenderer.send('minimize')
 }
 
 if (process.contextIsolated) {
