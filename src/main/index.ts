@@ -11,7 +11,7 @@ function createWindow(): void {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: 'hiddenInset',
-    frame: false,
+    // frame: false,
     trafficLightPosition: {
       x: 20,
       y: 20

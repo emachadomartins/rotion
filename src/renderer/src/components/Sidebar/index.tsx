@@ -4,13 +4,14 @@ import { CreatePage } from './CreatePage'
 import * as Navigation from './Navigation'
 import { Profile } from './Profile'
 import { Search } from './Search'
+import * as Collapsible from '@radix-ui/react-collapsible'
 
 export const Sidebar: React.FC = () => {
   const isMacOS = process.platform === 'darwin'
 
   return (
-    <aside className="bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden">
-      <button
+    <Collapsible.Content className="bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden">
+      <Collapsible.Trigger
         className={clsx(
           'absolute h-5 w-5 right-4 text-rotion-200 hover:text-rotion-50 inline-flex items-center justify-center top-[1.125rem]',
           {
@@ -20,13 +21,7 @@ export const Sidebar: React.FC = () => {
         )}
       >
         <CaretDoubleLeft className="h-4 w-4" />
-      </button>
-
-      <div
-        className={clsx('region-drag h-14', {
-          block: isMacOS
-        })}
-      ></div>
+      </Collapsible.Trigger>
 
       <div
         className={clsx(
@@ -53,6 +48,6 @@ export const Sidebar: React.FC = () => {
 
         <CreatePage />
       </div>
-    </aside>
+    </Collapsible.Content>
   )
 }
