@@ -2,6 +2,7 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
+import { createFileRoute, createURLRoute } from 'electron-router-dom'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -32,10 +33,14 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  const rendererUrl = process.env['ELECTRON_RENDERER_URL']
+
+  if (is.dev && rendererUrl) {
+    const devServerURL = createURLRoute(rendererUrl, 'main')
+    mainWindow.loadURL(devServerURL)
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    const fileRoute = createFileRoute(join(__dirname, '../renderer/index.html'), 'main')
+    mainWindow.loadFile(...fileRoute)
   }
 }
 
