@@ -1,7 +1,17 @@
-import { electronAPI } from '@electron-toolkit/preload'
-import { contextBridge } from 'electron'
+import { electronAPI, ElectronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer } from 'electron'
 
-const api = {}
+declare global {
+  export interface Window {
+    electron: ElectronAPI
+    api: typeof api
+  }
+}
+
+const api = {
+  fetchDocuments: async (params: unknown): Promise<void> =>
+    ipcRenderer.invoke('fetch-documents', params)
+}
 
 if (process.contextIsolated) {
   try {
