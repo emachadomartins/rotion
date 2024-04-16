@@ -1,35 +1,39 @@
-import clsx from 'clsx'
-import { Code, CaretDoubleRight, TrashSimple } from 'phosphor-react'
-import * as Breadcrumbs from './Breadcrumbs'
 import * as Collapsible from '@radix-ui/react-collapsible'
+import clsx from 'clsx'
+import { CaretDoubleRight, Code, TrashSimple } from 'phosphor-react'
 import React from 'react'
+import { isTrafficLightLeft, isTrafficLightRight } from '../../utils/system'
+import * as Breadcrumbs from './Breadcrumbs'
 
 interface HeaderProps {
   isSidebarOpen: boolean
 }
 
 export const Header: React.FC<HeaderProps> = ({ isSidebarOpen }) => {
-  const isMacOS = process.platform === 'darwin'
-
   return (
     <div
       className={clsx(
         'border-b border-rotion-600 py-[1.125rem] px-6 flex items-center gap-4 leading-tight transition-all duration-250 region-drag',
         {
-          'pl-24': !isSidebarOpen && isMacOS,
           'w-screen': !isSidebarOpen,
           'w-[calc(100vw-240px)]': isSidebarOpen
         }
       )}
     >
-      <Collapsible.Trigger
-        className={clsx('h-5 w-5 text-rotion-200 hover:text-rotion-50', {
-          hidden: isSidebarOpen,
-          block: !isSidebarOpen
+      <div
+        className={clsx('inline-flex region-no-drag', {
+          'ml-20': isTrafficLightLeft && !isSidebarOpen
         })}
       >
-        <CaretDoubleRight className="h-4 w-4" />
-      </Collapsible.Trigger>
+        <Collapsible.Trigger
+          className={clsx('h-5 w-5 text-rotion-200 hover:text-rotion-50', {
+            hidden: isSidebarOpen,
+            block: !isSidebarOpen
+          })}
+        >
+          <CaretDoubleRight className="h-4 w-4" />
+        </Collapsible.Trigger>
+      </div>
 
       <>
         <Breadcrumbs.Root>
@@ -46,7 +50,14 @@ export const Header: React.FC<HeaderProps> = ({ isSidebarOpen }) => {
         </Breadcrumbs.Root>
 
         <div className="inline-flex region-no-drag">
-          <button className="inline-flex items-center gap-1 text-rotion-100 text-sm hover:text-rotion-50">
+          <button
+            className={clsx(
+              'inline-flex items-center gap-1 text-rotion-100 text-sm hover:text-rotion-50',
+              {
+                'mr-20': isTrafficLightRight
+              }
+            )}
+          >
             <TrashSimple className="h-4 w-4" />
             Apagar
           </button>

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
+import { TrafficLight } from '../../components/TrafficLight'
 
 export const Default: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
@@ -18,6 +19,7 @@ export const Default: React.FC = () => {
         <Header isSidebarOpen={isSidebarOpen} />
         <Outlet />
       </div>
+      <TrafficLight />
     </Collapsible.Root>
   )
 }
