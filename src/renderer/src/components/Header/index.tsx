@@ -2,14 +2,16 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import { CaretDoubleRight, Code, TrashSimple } from 'phosphor-react'
 import React from 'react'
-import { isTrafficLightLeft, isTrafficLightRight } from '../../utils/system'
 import * as Breadcrumbs from './Breadcrumbs'
 
 interface HeaderProps {
   isSidebarOpen: boolean
+  trafficLightPosition: 'left' | 'right'
 }
 
-export const Header: React.FC<HeaderProps> = ({ isSidebarOpen }) => {
+export const Header: React.FC<HeaderProps> = ({ isSidebarOpen, trafficLightPosition }) => {
+  const isTrafficLightRight = trafficLightPosition === 'right'
+
   return (
     <div
       className={clsx(
@@ -22,7 +24,8 @@ export const Header: React.FC<HeaderProps> = ({ isSidebarOpen }) => {
     >
       <div
         className={clsx('inline-flex region-no-drag', {
-          'ml-20': isTrafficLightLeft && !isSidebarOpen
+          'ml-20': !isTrafficLightRight && !isSidebarOpen,
+          'pl-10': !isTrafficLightRight && !isSidebarOpen
         })}
       >
         <Collapsible.Trigger
@@ -54,7 +57,8 @@ export const Header: React.FC<HeaderProps> = ({ isSidebarOpen }) => {
             className={clsx(
               'inline-flex items-center gap-1 text-rotion-100 text-sm hover:text-rotion-50',
               {
-                'mr-20': isTrafficLightRight
+                'mr-20': isTrafficLightRight,
+                'pr-10': isTrafficLightRight
               }
             )}
           >

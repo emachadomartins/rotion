@@ -1,7 +1,7 @@
 export const isMacOS = process.platform === 'darwin'
 
-export const trafficLightPosition = isMacOS ? 'left' : 'right'
+export const systemTrafficLightPosition = isMacOS ? 'left' : 'right'
 
-export const isTrafficLightRight = trafficLightPosition === 'right'
+export const isTrafficLightRight = systemTrafficLightPosition === 'right'
 
-export const isTrafficLightLeft = trafficLightPosition === 'left'
+export const isTrafficLightLeft = systemTrafficLightPosition === 'left'

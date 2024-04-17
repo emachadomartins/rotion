@@ -1,28 +1,34 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import { CaretDoubleLeft } from 'phosphor-react'
-import { isTrafficLightLeft, isTrafficLightRight } from '../../utils/system'
 import { CreatePage } from './CreatePage'
 import * as Navigation from './Navigation'
 import { Profile } from './Profile'
 import { Search } from './Search'
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  trafficLightPosition: 'left' | 'right'
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ trafficLightPosition }: SidebarProps) => {
+  const isTrafficLightRight = trafficLightPosition === 'right'
+
   return (
-    <Collapsible.Content
-      className={clsx(
-        'bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden',
-        {
-          'pt-0': isTrafficLightRight,
-          'pt-10': isTrafficLightLeft
-        }
-      )}
-    >
+    <Collapsible.Content className="bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden">
       <Collapsible.Trigger className="absolute h-5 w-5 right-4 text-rotion-200 hover:text-rotion-50 inline-flex items-center justify-center top-[1.125rem]">
         <CaretDoubleLeft className="h-4 w-4" />
       </Collapsible.Trigger>
 
-      <div className="flex-1 flex flex-col gap-8 h-full w-[240px] group-data-[state=open]:opacity-100 group-data-[state=closed]:opacity-0 transition-opacity duration-200 pt-6">
+      <div
+        className={clsx(
+          'flex-1 flex flex-col gap-8 h-full w-[240px] group-data-[state=open]:opacity-100 group-data-[state=closed]:opacity-0 transition-opacity duration-200',
+          {
+            // 'mt-0': isTrafficLightRight,
+            'mt-10': !isTrafficLightRight,
+            'pt-6': !isTrafficLightRight
+          }
+        )}
+      >
         <Profile />
         <Search />
 
